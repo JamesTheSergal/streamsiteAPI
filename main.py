@@ -22,15 +22,19 @@ class MakeStreamKey(Resource):
     
 class verifyStreamKey(Resource):
     def post(self):
+        splitdata = {}
         # Verify that the stream key is valid
         postdata = request.get_data()
         postdata = str(postdata.decode("utf-8")).split("&")
-        print(postdata)
+        for i in range(len(postdata)):
+            key = postdata[i].split("=")[0]
+            data = postdata[i].split("=")[1]
+            splitdata[key] = data
 
-        #if key in streams:
-        #    return jsonify({"valid": True})
-        #else:
-        #    abortKeyNotValid()
+        if splitdata["name"] in streams:
+            return jsonify({"valid": True})
+        else:
+            abortKeyNotValid()
         pass
         
 
