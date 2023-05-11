@@ -30,6 +30,8 @@ api = Api(app)
 
 streams = []
 
+streams.append("snerg")
+
 def abortKeyNotValid():
     # Abort the request if the key is not valid
     abort(401, "Key not valid")
