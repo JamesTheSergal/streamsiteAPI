@@ -1,6 +1,16 @@
 import requests
+import os
+from dotenv import load_dotenv
 
-BASE = "http://5.161.219.150:5000/"
+# Check to see if .env exists
+if not os.path.isfile(".env"):
+    print("No enviroment file found to run the server...")
+    exit()
+
+# Load the enviroment file
+load_dotenv()
+
+BASE = os.environ.get("api_url")
 
 #response = requests.get(BASE + "makeStreamKey")
 #print(response.json())
