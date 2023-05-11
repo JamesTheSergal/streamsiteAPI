@@ -1,6 +1,17 @@
+import os
+from dotenv import load_dotenv
 from flask import Flask, abort, jsonify, request
 from flask_restful import Api, Resource
 import uuid
+
+# Check to see if .env exists
+if not os.path.isfile(".env"):
+    print("No enviroment file found to run the server...")
+    exit()
+
+# Load the enviroment file
+load_dotenv()
+
 
 app = Flask(__name__)
 api = Api(app)
