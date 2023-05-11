@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from flask import Flask, abort, jsonify, request
 from flask_restful import Api, Resource
 import uuid
+import mysql.connector
 
 # Check to see if .env exists
 if not os.path.isfile(".env"):
@@ -15,6 +16,14 @@ load_dotenv()
 mysql_host = os.getenv("mysql_host")
 mysql_user = os.getenv("mysql_user")
 mysql_password = os.getenv("mysql_pass")
+
+# Connect to the database
+db = mysql.connector.connect(
+    host=mysql_host,
+    user=mysql_user,
+    password=mysql_password,
+    database="streaming"
+)
 
 app = Flask(__name__)
 api = Api(app)
