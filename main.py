@@ -59,10 +59,14 @@ class verifyStreamKey(Resource):
         else:
             abortKeyNotValid()
         pass
-        
+
+class greetTraveler(Resource):
+    def get(self):
+        return "Hello traveler!"
 
 api.add_resource(verifyStreamKey, "/verifyStreamKey") 
 api.add_resource(MakeStreamKey, "/makeStreamKey")
+api.add_resource(greetTraveler, "/")
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0")
