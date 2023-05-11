@@ -12,6 +12,9 @@ if not os.path.isfile(".env"):
 # Load the enviroment file
 load_dotenv()
 
+mysql_host = os.getenv("mysql_host")
+mysql_user = os.getenv("mysql_user")
+mysql_password = os.getenv("mysql_pass")
 
 app = Flask(__name__)
 api = Api(app)
