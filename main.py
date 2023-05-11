@@ -26,7 +26,7 @@ db = mysql.connector.connect(
     database="streamagent"
 )
 
-print("Connected to database..."")
+print("Connected to database...")
 
 app = Flask(__name__)
 api = Api(app)
