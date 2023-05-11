@@ -12,6 +12,7 @@ if not os.path.isfile(".env"):
 
 # Load the enviroment file
 load_dotenv()
+print("Loaded enviroment file...")
 
 mysql_host = os.getenv("mysql_host")
 mysql_user = os.getenv("mysql_user")
@@ -24,6 +25,8 @@ db = mysql.connector.connect(
     password=mysql_password,
     database="streamagent"
 )
+
+print("Connected to database..."")
 
 app = Flask(__name__)
 api = Api(app)
