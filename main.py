@@ -22,7 +22,7 @@ db = mysql.connector.connect(
     host=mysql_host,
     user=mysql_user,
     password=mysql_password,
-    database="streaming"
+    database="streamagent"
 )
 
 app = Flask(__name__)
