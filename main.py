@@ -1,6 +1,6 @@
 import os
 from dotenv import load_dotenv
-from flask import Flask, abort, jsonify, request
+from flask import Flask, abort, jsonify, make_response, request
 from flask_restful import Api, Resource
 import uuid
 import mysql.connector
@@ -19,12 +19,12 @@ mysql_user = os.getenv("mysql_user")
 mysql_password = os.getenv("mysql_pass")
 
 # Connect to the database
-db = mysql.connector.connect(
-    host=mysql_host,
-    user=mysql_user,
-    password=mysql_password,
-    database="streamagent"
-)
+#db = mysql.connector.connect(
+#    host=mysql_host,
+#    user=mysql_user,
+#    password=mysql_password,
+#    database="streamagent"
+#)
 
 print("Connected to database...")
 
@@ -39,14 +39,27 @@ def abortKeyNotValid():
     # Abort the request if the key is not valid
     abort(401, "Key not valid")
 
+def build_preflight_response():
+    response = make_response()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add('Access-Control-Allow-Headers', "*")
+    response.headers.add('Access-Control-Allow-Methods', "*")
+    return response
+def build_actual_response(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
+
 class MakeStreamKey(Resource):
+    def options(self):
+        return build_preflight_response()
     def get(self):
         # Return Json for a randomized id
         id = str(uuid.uuid4())
         streams.append(id)
         print(f'Stream keys: ')
         print(streams)
-        return jsonify({"id": id})
+        response = jsonify({"id": id})
+        return build_actual_response(response)
     
 class verifyStreamKey(Resource):
     def post(self):
